@@ -1,5 +1,5 @@
 import React, { Component, createContext } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import styled from 'styled-components';
 import './App.css';
 import Card from './Components/Card';
