@@ -2,18 +2,18 @@ import React, {useContext} from 'react';
 import styled, {keyframes} from 'styled-components';
 import {ColorTheme} from '../App';
 
-const fadeZoomOut = keyframes`
-    from {
-        opacity: 1.0;
-        transform: scale(1, 1);
-        filter: blur(0px);
-        }
-    to {
-        opacity: 0;
-        transform: scale(0.5, 0.5);
-        filter: blur(10px);
-        }
-`;
+// const fadeZoomOut = keyframes`
+//     from {
+//         opacity: 1.0;
+//         transform: scale(1, 1);
+//         filter: blur(0px);
+//         }
+//     to {
+//         opacity: 0;
+//         transform: scale(0.5, 0.5);
+//         filter: blur(10px);
+//         }
+// `;
 
 const fadeZoomIn = keyframes`
     from {
