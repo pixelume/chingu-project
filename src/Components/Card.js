@@ -1,48 +1,85 @@
-import React, {useContext} from 'react';
-import styled, {keyframes} from 'styled-components';
-import {ColorTheme} from '../App';
+import React, { useContext, useState } from "react";
+import styled, { css } from "styled-components";
+import { StateContext } from "../App";
+import { hoverAnim, fadeIn, slideUp, slideDown } from '../animations';
 
-// const fadeZoomOut = keyframes`
-//     from {
-//         opacity: 1.0;
-//         transform: scale(1, 1);
-//         filter: blur(0px);
-//         }
-//     to {
-//         opacity: 0;
-//         transform: scale(0.5, 0.5);
-//         filter: blur(10px);
-//         }
-// `;
-
-const fadeZoomIn = keyframes`
-    from {
-        opacity: 0;
-        transform: scale(0.8, 0.8);
-        filter: blur(10px);
-        /* box-shadow: none; */
-        }
-    to {
-        opacity: 1.0;
-        transform: scale(1, 1);
-        filter: blur(0px);
-        /* box-shadow: 1px 2px 13px 0px rgba(0,0,0,0.41); */
-        }
-`;
-
-const CardContainer = styled.div`
-    width: 30%;
-    padding: 50px;
-    background-color: ${props => props.bg || 'inherit'};
-    text-align: center;
-    border-radius: 20px;
-    /* box-shadow: 1px 2px 13px 0px rgba(0,0,0,0.41); */
-    animation: ${fadeZoomIn} 0.5s ease-in-out;
+const TriggerBox = styled.div`
+    transform: scale(1);
+    &:hover {
+        transform: scale(1.05);
+    }
+    transition: transform 0.3s ease-in-out;
 `
 
-export default () => {
-    const {light} = useContext(ColorTheme);
+const CardContainer = styled.div`
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+    background-color: #efefef;
+    text-align: center;
+    border-radius: 20px;
+    border: 0.5px solid lightgrey;
+    box-sizing: border-box;
+    background-image: url(${props => props.bgImg});
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    box-shadow: none;
+    transition: box-shadow 0.5s ease-in-out;
+    ${props =>
+        props.active
+            ? css`
+            animation: ${hoverAnim} 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+            box-shadow: 3px 5px 13px 0px rgba(0,0,0,0.60);`
+            : null} 
+`;
+
+const DescrContainer = styled.div`
+    color: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    animation: ${fadeIn} 0.5s ease-in-out;
+`
+
+const DescrHeading = styled.h2`
+    animation: ${slideDown} 0.5s ease-in-out;
+`
+
+const Descr = styled.p`
+    animation: ${slideUp} 0.5s ease-in-out;
+`
+
+export default ({heading, description, coverImg}) => {
+    const [cardActive, setCardActive] = useState(false);
+    const { setActiveDisplay, animToNext } = useContext(StateContext);
+
     return (
-        <CardContainer bg={light}>Hello</CardContainer>
-    )
-}
+        <TriggerBox
+            onMouseEnter={() => setCardActive(true)}
+            onMouseLeave={() => setCardActive(false)}
+        >
+            <CardContainer
+                active={cardActive}
+                // bg={light}
+                bgImg={coverImg}
+            >
+                {cardActive &&
+                    <DescrContainer onClick={() => animToNext(heading)}>
+                        <DescrHeading style={{color: "white"}}>{heading}</DescrHeading>
+                        <Descr>
+                            {description}
+                        </Descr>
+                    </DescrContainer>}
+            </CardContainer>
+        </TriggerBox>
+    );
+};
