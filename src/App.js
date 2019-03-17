@@ -32,7 +32,7 @@ const GamesGridWrapper = styled.div`
 `;
 const SingleGameWrapper = styled.div`
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     justify-content: center;
     align-items: center;
     width: 800px;
