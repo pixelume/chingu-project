@@ -60,7 +60,7 @@ const Descr = styled.p`
 
 export default ({heading, description, coverImg}) => {
     const [cardActive, setCardActive] = useState(false);
-    const { setActiveDisplay, animToNext } = useContext(StateContext);
+    const { animToNext } = useContext(StateContext);
 
     return (
         <TriggerBox

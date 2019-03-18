@@ -4,6 +4,7 @@ import "./App.css";
 import Card from "./Components/Card";
 import menuData from '../src/Data/menuData';
 import Hangman from './Containers/Hangman';
+import Trivia from './Containers/Trivia';
 import ComingSoon from './Containers/ComingSoon';
 import { fadeZoomOut, fadeZoomIn } from './animations';
 import {Button} from './UI/Button';
@@ -18,7 +19,8 @@ const MainWindow = styled.div`
     width: 100%;
     justify-content: center;
     align-items: center;
-`;
+`
+;
 const GamesGridWrapper = styled.div`
     display: flex;
     flex-flow: row;
@@ -27,14 +29,16 @@ const GamesGridWrapper = styled.div`
     justify-content: center;
     animation: ${fadeZoomIn} 0.3s ease-in-out;
     ${props => props.animOut
-        ? css`animation: ${fadeZoomOut} 0.3s ease-in-out;`
-        : null}
+            ? css`animation: ${fadeZoomOut} 0.3s ease-in-out;`
+            : null}
 `;
+
 const SingleGameWrapper = styled.div`
     display: flex;
     flex-flow: row;
     justify-content: center;
     align-items: center;
+    color: white;
     width: 800px;
     height: 600px;
     border-radius: 20px;
@@ -44,7 +48,7 @@ const SingleGameWrapper = styled.div`
     ${props => props.animOut
         ? css`animation: ${fadeZoomOut} 0.3s ease-in-out;`
         : null}
-`
+`;
 
 export default () => {
     const [activeDisplay, setActiveDisplay] = useState("main");
@@ -59,12 +63,12 @@ export default () => {
     return (
         <StateContext.Provider value={{activeDisplay, setActiveDisplay, setAnimateOut, animToNext}}>
             <MainWindow>
-                
                     {activeDisplay === "main" &&
                         <GamesGridWrapper
                             animOut={animateOut}
                         >
                             {menuData.map(data => <Card
+                                key={data.title}
                                 heading={data.title}
                                 description={data.descr}
                                 coverImg={data.image}
@@ -77,9 +81,9 @@ export default () => {
                             animOut={animateOut}
                         >
                             {activeDisplay === "Hangman" && <Hangman/>}
-                            {activeDisplay === "Fabulous Game 2" && <ComingSoon/>}
-                            {activeDisplay === "Fabulous Game 3" && <ComingSoon/>}
-                            {activeDisplay === "Fabulous Game 4" && <ComingSoon/>}
+                            {activeDisplay === "Trivia Quiz" && <Trivia/>}
+                            {activeDisplay === "Battleship" && <ComingSoon/>}
+                            {activeDisplay === "Mastermind" && <ComingSoon/>}
                         </SingleGameWrapper>
                         <Button onClick={() => animToNext("main")}>《 Home</Button>
                         </>}

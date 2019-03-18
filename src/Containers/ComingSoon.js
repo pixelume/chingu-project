@@ -3,6 +3,6 @@ import React from 'react';
 
 export default () => {
     return (
-        <h2 style={{color: 'white'}}>Coming Soon</h2>
+        <h2>Coming Soon</h2>
     )
 }
