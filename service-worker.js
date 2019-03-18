@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/chingu-project.git/precache-manifest.a151b1f0c6188f3d678bfaeeb864ce09.js"
+  "/chingu-project/precache-manifest.fefa7dc7a0239976e0e30fd535fa9847.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/chingu-project.git/index.html", {
+workbox.routing.registerNavigationRoute("/chingu-project/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
